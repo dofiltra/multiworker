@@ -5,7 +5,8 @@
   "scripts": {
     "start": "bun run ./app/app.ts",
     "dev": "bun --watch run ./app/app.ts",
-    "dev:hot": "bun --hot run ./app/app.ts"
+    "dev:hot": "bun --hot run ./app/app.ts",
+    "upg:do": "bun update dprx-types@latest doback@latest && bun install dprx-types doback --force"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -15,7 +16,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "doback": "^1.0.282",
+    "doback": "^1.0.283",
     "dprx-types": "^1.2.928"
   }
 }
