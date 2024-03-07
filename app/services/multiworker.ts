@@ -1,9 +1,27 @@
 import { Dodecorator, type TResultError } from 'dprx-types'
 import path from 'path'
+import os from 'os'
+import { DowsClient, DoredisaClient, DomongoClient } from 'doback'
 
 export class Multiworker {
   static get rootPath() {
     return path.resolve(import.meta.dir, '..')
+  }
+
+  @Dodecorator.doretry({})
+  static async build({}) {
+    console.log('Starting...')
+    console.log(
+      'WsClient',
+      await DowsClient.build({
+        host: 'cache.dofiltra.com',
+        token: `${os.hostname().replaceAll('-', '_')}_doback_debug_${new Date().getTime()}`,
+      })
+    )
+    console.log('RedisClient', await DoredisaClient.build({}))
+    console.log('MongoClient', await DomongoClient.build({}))
+
+    // log(await DoredisaClient.subscribe({ rooms: [DolistKey.OpenAiKeys] }))
   }
 
   @Dodecorator.doretry({})

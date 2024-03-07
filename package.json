@@ -14,6 +14,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "doback": "^1.0.282",
     "dprx-types": "^1.2.928"
   }
 }
