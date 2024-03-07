@@ -16,8 +16,6 @@ export class App {
     )
     console.log('RedisClient', await DoredisaClient.build({}))
     console.log('MongoClient', await DomongoClient.build({}))
-
-    // log(await DoredisaClient.subscribe({ rooms: [DolistKey.OpenAiKeys] }))
   }
 
   @Dodecorator.doretry({})
