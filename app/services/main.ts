@@ -20,6 +20,7 @@ export class App {
 
   @Dodecorator.doretry({})
   static async startTimer({}: {}) {
+    console.log('startTimer')
     const { result: containers = [], error: errorPop } = await DoredisaClient.sPopOne<any>({
       key: `${DoredisaKeyPrefix.NextQueue}${ModuleName.Doextractor}`,
       count: 1,
