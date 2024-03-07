@@ -1,4 +1,3 @@
-// prevents TS errors
 declare var self: Worker;
 
 self.addEventListener("message", (event) => {
