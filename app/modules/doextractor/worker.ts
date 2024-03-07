@@ -1,10 +1,10 @@
-import { Dodecorator, sleep } from 'dprx-types'
+import { Dodecorator, sleep, type TResultError } from 'dprx-types'
 
 declare var self: Worker
 
 class Doextractor {
   @Dodecorator.doretry({})
-  static async exec({}) {
+  static async exec({}): TResultError<any> {
     await sleep(5e3)
     return { result: 'finish' }
   }
