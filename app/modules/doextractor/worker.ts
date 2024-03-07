@@ -1,7 +1,10 @@
-declare var self: Worker;
+import { sleep } from 'dprx-types'
 
-self.addEventListener("message", (event) => {
-  console.log('worker.ts: "message"', event.data);
-});
+declare var self: Worker
 
-postMessage("worker.ts: 1");
+self.addEventListener('message', async (event) => {
+  console.log('worker.ts: "message"', event.data)
+
+  await sleep(5e3)
+  postMessage('worker.ts: result')
+})

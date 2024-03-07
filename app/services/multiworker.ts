@@ -9,13 +9,13 @@ export class Multiworker {
   }
 
   @Dodecorator.doretry({})
-  static async build({}) {
+  static async build({ wsHost = 'cache.dofiltra.com' }: { wsHost?: string }) {
     console.log('Starting...')
     console.log(
       'WsClient',
       await DowsClient.build({
-        host: 'cache.dofiltra.com',
-        token: `${os.hostname().replaceAll('-', '_')}_doback_debug_${new Date().getTime()}`,
+        host: wsHost,
+        token: `${os.hostname().replaceAll('-', '_')}_mutltiworker_${new Date().getTime()}`,
       })
     )
     console.log('RedisClient', await DoredisaClient.build({}))

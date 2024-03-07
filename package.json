@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "bun run ./app/main.ts",
-    "dev": "bun --watch run ./app/main.ts"
+    "dev": "bun --watch run ./app/main.ts",
+    "dev:hot": "bun --hot run ./app/main.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
