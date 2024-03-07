@@ -1,14 +1,7 @@
-const workerURL = new URL("worker.ts", import.meta.url).href;
-const worker = new Worker(workerURL);
+import { Multiworker } from "./services/multiworker";
 
-worker.addEventListener("open", () => {
-  console.log("worker is ready");
-});
-worker.addEventListener("close", (event) => {
-  console.log("worker is being closed");
-});
-worker.addEventListener("message", (event) => {
-  console.log(event.data);
+const { result: doextractorWorker } = await Multiworker.createWorker({
+  filepath: `/modules/doextractor/worker.ts`,
 });
 
-worker.postMessage("Sent from main thread!");
+doextractorWorker.postMessage({ o: "Sent from main thread!" });

@@ -2,6 +2,10 @@
   "name": "multiworker",
   "module": "./app/worker.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun run ./app/main.ts",
+    "dev": "bun --watch run ./app/main.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "typescript": "^5.4.2"
