@@ -1,11 +1,11 @@
 {
   "name": "multiworker",
-  "module": "./app/worker.ts",
+  "module": "./app/app.ts",
   "type": "module",
   "scripts": {
-    "start": "bun run ./app/main.ts",
-    "dev": "bun --watch run ./app/main.ts",
-    "dev:hot": "bun --hot run ./app/main.ts"
+    "start": "bun run ./app/app.ts",
+    "dev": "bun --watch run ./app/app.ts",
+    "dev:hot": "bun --hot run ./app/app.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
