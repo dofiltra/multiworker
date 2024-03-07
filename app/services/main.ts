@@ -1,6 +1,6 @@
 import os from 'os'
 import { DowsClient, DoredisaClient, DomongoClient } from 'doback'
-import { Dodecorator, sleep } from 'dprx-types'
+import { Dodecorator, DoredisaKeyPrefix, ModuleName, sleep } from 'dprx-types'
 import { Multiworker } from './multiworker'
 
 export class App {
@@ -20,15 +20,23 @@ export class App {
 
   @Dodecorator.doretry({})
   static async startTimer({}: {}) {
-    await Multiworker.createWorker({
-      filepath: `/modules/doextractor/worker.ts`,
-      data: { o: 'Sent from main thread!' },
-      events: {
-        onMessage: async ({ data }) => {
-          console.log(data)
-          return {}
+    const { result: containers = [], error: errorPop } = await DoredisaClient.sPopOne<any>({
+      key: `${DoredisaKeyPrefix.NextQueue}${ModuleName.Doextractor}`,
+      count: 1,
+      timeout: 120e3,
+    })
+
+    containers.map(async (container) => {
+      await Multiworker.createWorker({
+        filepath: `/modules/doextractor/worker.ts`,
+        data: container,
+        events: {
+          onMessage: async ({ data }) => {
+            console.log(data)
+            return {}
+          },
         },
-      },
+      })
     })
 
     await sleep(60e3)
