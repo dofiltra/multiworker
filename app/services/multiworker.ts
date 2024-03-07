@@ -1,11 +1,6 @@
 import { Dodecorator, type TResultError } from 'dprx-types'
-import path from 'path'
 
 export class Multiworker {
-  static get rootPath() {
-    return path.resolve(import.meta.dir, '..')
-  }
-
   @Dodecorator.doretry({})
   static async createWorker({
     filepath,

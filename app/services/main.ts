@@ -1,9 +1,14 @@
+import path from 'path'
 import os from 'os'
 import { DowsClient, DoredisaClient, DomongoClient } from 'doback'
 import { Dodecorator, DoredisaKeyPrefix, ModuleName, sleep } from 'dprx-types'
 import { Multiworker } from './multiworker'
 
 export class App {
+  static get rootPath() {
+    return path.resolve(import.meta.dir, '..')
+  }
+
   @Dodecorator.doretry({})
   static async build({ wsHost = 'cache.dofiltra.com' }: { wsHost?: string }) {
     console.log('Starting...')
