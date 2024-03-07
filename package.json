@@ -12,5 +12,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "dprx-types": "^1.2.928"
   }
 }
