@@ -1,6 +1,6 @@
 import os from 'os'
 import { DowsClient, DoredisaClient, DomongoClient } from 'doback'
-import { Dodecorator } from 'dprx-types'
+import { Dodecorator, sleep } from 'dprx-types'
 import { Multiworker } from './multiworker'
 
 export class App {
@@ -32,5 +32,8 @@ export class App {
         },
       },
     })
+
+    await sleep(60e3)
+    void this.startTimer({})
   }
 }
