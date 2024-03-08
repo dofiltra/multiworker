@@ -40,18 +40,20 @@ export class App {
       timeout: 120e3,
     })
 
-    containers.map(async (container) => {
-      await Multiworker.createWorker({
-        filepath: `/modules/doextractor/worker.ts`,
-        data: container,
-        events: {
-          onMessage: async ({ data }) => {
-            console.log(data)
-            return {}
+    await Promise.all(
+      containers.map(async (container) => {
+        await Multiworker.createWorker({
+          filepath: `/modules/doextractor/worker.ts`,
+          data: container,
+          events: {
+            onMessage: async ({ data }) => {
+              console.log(data)
+              return {}
+            },
           },
-        },
+        })
       })
-    })
+    )
 
     await sleep(delay)
     void this.startTimer({})
