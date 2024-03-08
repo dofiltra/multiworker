@@ -4,9 +4,10 @@ import { DowsClient, DoredisaClient, DomongoClient } from 'doback'
 import { Dodecorator, DoredisaKeyPrefix, ModuleName, sleep } from 'dprx-types'
 import { Multiworker } from './multiworker'
 
+type TTimerOpts = { delay?: number }
 type TBuildSettings = {
   wsHost?: string
-  timerOpts?: any
+  timerOpts?: TTimerOpts
 }
 
 export class App {
@@ -31,7 +32,7 @@ export class App {
   }
 
   @Dodecorator.doretry({})
-  static async startTimer({}: {}) {
+  static async startTimer({ delay = 60e3 }: TTimerOpts) {
     console.log('startTimer')
     const { result: containers = [], error: errorPop } = await DoredisaClient.sPopOne<any>({
       key: `${DoredisaKeyPrefix.NextQueue}${ModuleName.Doextractor}`,
@@ -52,7 +53,7 @@ export class App {
       })
     })
 
-    await sleep(60e3)
+    await sleep(delay)
     void this.startTimer({})
   }
 }
